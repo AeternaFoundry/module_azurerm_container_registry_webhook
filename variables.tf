@@ -54,19 +54,11 @@ EOT
   validation {
     condition = alltrue([
       for k, v in var.container_registry_webhooks : (
-        length(v.registry_name) <= 50
-      )
-    ])
-    error_message = "[from validate.ContainerRegistryName: invalid when len(value) > 50]"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.container_registry_webhooks : (
         v.tags == null || (length(v.tags) <= 50)
       )
     ])
     error_message = "[from tags.Validate: invalid when len(value) > 50]"
   }
-  # Note: 11 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
+  # Note: 10 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
 }
 
